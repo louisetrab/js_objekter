@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+      article {
+        border: 1px solid #333;
+        padding: 10px;
+        margin: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <section></section>
+
+    <template>
+      <article>
+        <h2 class="mærke"></h2>
+        <p class="model"></p>
+        <p class="motor"></p>
+        <p class="km"></p>
+        <ul class="udstyr"></ul>
+      </article>
+    </template>
+
+    <script>
+      const container = document.querySelector("section");
+      const template = document.querySelector("template");
+      const fil = "biler.json";
+
+      async function hentdata() {
+        const resultst = await fetch(fil);
+        const json = await resultst.json();
+        vis(json);
+      }
+
+      function vis(json) {
+        //løb bil-listen igennem og insæt data i template
+        json.forEach((bil) => {
+          //placer bilerne i html
+          const klon = template.cloneNode(true).content;
+          klon.querySelector("h2").textContent = bil.mærke;
+          klon.querySelector(".model").textContent = "Model: " + bil.model;
+          klon.querySelector(".motor").textContent = "Motor: " + bil.motor;
+          klon.querySelector(".km").textContent = "Km: " + bil.km;
+          // løb udstyr array inde i alle bil objekter
+          bil.udstyr.forEach((ting) => {
+            const li = document.createElement("li");
+            li.textContent = ting;
+            klon.querySelector(".udstyr").appendChild(li);
+          });
+          container.appendChild(klon);
+        });
+      }
+      hentdata();
+    </script>
+  </body>
+</html>
