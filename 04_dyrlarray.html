@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <article></article>
+    <script>
+      let dyr = [
+        {
+          navn: "frø",
+          type: "amfibie",
+          billede: "http://mabe-kea.dk/E19/pics/frog.png",
+          levested: "vandhullet",
+        },
+        {
+          navn: "gris",
+          type: "pattedyr",
+          billede: "http://mabe-kea.dk/E19/pics/pig.png",
+          levested: "svinefarme",
+        },
+        {
+          navn: "ræv",
+          type: "pattedyr",
+          billede: "http://mabe-kea.dk/E19/pics/fox.png",
+          levested: "skoven",
+        },
+        {
+          navn: "sild",
+          type: "fisk",
+          billede: "http://mabe-kea.dk/E19/pics/sild.jpg",
+          levested: "havet",
+        },
+        {
+          navn: "krokodille",
+          type: "krybdyr",
+          billede: "http://mabe-kea.dk/E19/pics/kroko.jpg",
+          levested: "floden",
+        },
+      ];
+      //   console.log(dyr);
+      console.log(dyr);
+
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("DOMContentLoaded");
+        const destination = document.querySelector("article");
+        // console.log(destination);
+
+        const dyrInfo = `Navn: ${dyr.navn}, Type: ${dyr.type}, Levested, ${dyr.levested}`;
+
+        destination.textContent = dyrInfo;
+
+        let pic = document.createElement("img");
+        pic.src = dyr.billede;
+        destination.appendChild(pic);
+      });
+    </script>
+  </body>
+</html>
